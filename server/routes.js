@@ -16,7 +16,7 @@ module.exports = {
       }
     }
 	},
-	"/v1/classes/bug/objects" : {
+	"/v1/classes/bugs/objects" : {
 		GET : {
 			_pre : function(req, res) {
 				req.logger.log("GET for bugs")
