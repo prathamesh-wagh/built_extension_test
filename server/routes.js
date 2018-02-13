@@ -24,7 +24,7 @@ module.exports = {
 			}
 		}
 	},
-	"/v1/classes/bug/objects/:objectuid" : {
+	"/v1/classes/bugs/objects/:objectuid" : {
     // PUT call signifies Save operation
     PUT: {
       // Before save hook
