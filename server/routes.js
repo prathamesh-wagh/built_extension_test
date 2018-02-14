@@ -72,7 +72,7 @@ module.exports = {
 			// Fetch Class instance and initialize object to save and call save()
 			// function in Built SDK
 			return bapp.Class("person").Object({
-				"name" : "Test"
+				"first_name" : "Test from function"
 			})
 			.save()
 			.then(function(personObject) {
