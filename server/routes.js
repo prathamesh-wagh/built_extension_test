@@ -45,29 +45,34 @@ module.exports = {
       }
     }
   },
-	// Hook call while creating person object in Built.io Backend
-  "/v1/classes/person/objects" : {
-		GET : {
-			_pre : function(req, res) {
-				req.logger.log("Calling get for person class")
-				req.bobjekt = req.bobjekt.where("first_name", "Test from function")
-
-				return this.resSuccess(req, res)
+	"/v1/classes/person/objects": {
+		"/:objectuid" : {
+			GET : {
+				_pre : function(req, res) {
+					req.logger.log("Calling single object hook in pre")
+					return this.resSuccess(req, res)
+				}
 			}
 		},
-    POST : {
-      _pre: function(req, res) {
-				// Checks whether age of person being created should be greater than 21
-				req.logger.log("Calling person object route")
-				req.logger.log(req.payload)
-				// if(req.bobjekt.get("age") <= 21) {
-				// 	return this.resError(req, res, {
-				// 		"error" : "Person age should be less than 21."
-				// 	})
-				// }
-        return this.resSuccess(req, res, "Success..!!")
-      }
-    }
+		GET : {
+			_pre : function(req, res) {
+				req.logger.log("Call hit from hooks in object GET : ")
+				return this.resSuccess(req, res, "Success")
+			}
+		},
+		POST: {
+			_pre: function(req, res) {
+				req.logger.log("Test")
+				req.bobjekt = req.bobjekt.set("age", 54)
+				
+				req.logger.log(req.bobjekt)
+				
+				return this.resSuccess(req, res)
+			},
+			_post: function(req, res) {
+				return this.resSuccess(req, res)
+			}
+		}
 	},
 	"/v1/functions/createPerson": {
 		POST : function(req, res) {
