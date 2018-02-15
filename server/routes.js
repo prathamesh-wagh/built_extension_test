@@ -57,8 +57,14 @@ module.exports = {
   "/v1/classes/person/objects" : {
     POST : {
       _pre: function(req, res) {
-        // Set "age" of person object being created to 54
-        req.bobjekt = req.bobjekt.set("age", 54)
+				// Checks whether age of person being created should be greater than 21
+				req.logger.log("Calling person object route")
+				if(req.bobjekt.get("age") <= 21) {
+					return this.resError(req, res, {
+						"error" : "Person age should be less than 21."
+					})
+				}
+				
         return this.resSuccess(req, res)
       }
     }
@@ -72,7 +78,7 @@ module.exports = {
 			// Fetch Class instance and initialize object to save and call save()
 			// function in Built SDK
 			return bapp.Class("person").Object({
-				"first_name" : "Test from function"
+				"first_name" : "Test"
 			})
 			.save()
 			.then(function(personObject) {
