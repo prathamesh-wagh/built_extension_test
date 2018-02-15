@@ -4,6 +4,7 @@ module.exports = {
 	// hello_world is the name of function in this code block
 	"/v1/functions/hello_world" : {
 		GET : function(req, res) {
+			req.logger.log("Calling function hello_world")
 			return this.resSuccess(req, res, "Hello World..!!")
 		}
 	},
@@ -50,12 +51,12 @@ module.exports = {
       _pre: function(req, res) {
 				// Checks whether age of person being created should be greater than 21
 				req.logger.log("Calling person object route")
+				req.logger.log(req.payload)
 				// if(req.bobjekt.get("age") <= 21) {
 				// 	return this.resError(req, res, {
 				// 		"error" : "Person age should be less than 21."
 				// 	})
 				// }
-				
         return this.resSuccess(req, res)
       }
     }
