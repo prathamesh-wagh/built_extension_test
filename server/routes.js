@@ -57,7 +57,7 @@ module.exports = {
 				// 		"error" : "Person age should be less than 21."
 				// 	})
 				// }
-        return this.resSuccess(req, res)
+        return this.resSuccess(req, res, "Success..!!")
       }
     }
 	},
