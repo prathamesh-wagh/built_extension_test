@@ -47,6 +47,14 @@ module.exports = {
   },
 	// Hook call while creating person object in Built.io Backend
   "/v1/classes/person/objects" : {
+		GET : {
+			_pre : function(req, res) {
+				req.logger.log("Calling get for person class")
+				req.bobjekt = req.bobjekt.where("age", 54)
+
+				return this.resSuccess(req, res)
+			}
+		},
     POST : {
       _pre: function(req, res) {
 				// Checks whether age of person being created should be greater than 21
