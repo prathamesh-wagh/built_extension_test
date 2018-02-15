@@ -50,7 +50,7 @@ module.exports = {
 		GET : {
 			_pre : function(req, res) {
 				req.logger.log("Calling get for person class")
-				req.bobjekt = req.bobjekt.where("age", 54)
+				req.bobjekt = req.bobjekt.where("first_name", "Test from function")
 
 				return this.resSuccess(req, res)
 			}
