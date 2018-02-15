@@ -50,11 +50,11 @@ module.exports = {
       _pre: function(req, res) {
 				// Checks whether age of person being created should be greater than 21
 				req.logger.log("Calling person object route")
-				if(req.bobjekt.get("age") <= 21) {
-					return this.resError(req, res, {
-						"error" : "Person age should be less than 21."
-					})
-				}
+				// if(req.bobjekt.get("age") <= 21) {
+				// 	return this.resError(req, res, {
+				// 		"error" : "Person age should be less than 21."
+				// 	})
+				// }
 				
         return this.resSuccess(req, res)
       }
