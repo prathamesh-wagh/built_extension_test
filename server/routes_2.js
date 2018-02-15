@@ -7,6 +7,15 @@ module.exports = {
 			return this.resSuccess(req, res, "Hello World..!!")
 		}
 	},
+	// Hook call while fetching person objects from Built.io Backend
+  "/v1/classes/person/objects" : {
+    GET : {
+      _pre: function(req, res) {
+        req.bobjekt = req.bobjekt.where("age", 54)
+        return this.resSuccess(req, res)
+      }
+    }
+	},
 	"/v1/classes/bugs/objects" : {
 		GET : {
 			_pre : function(req, res) {
@@ -159,5 +168,70 @@ module.exports = {
 				return when.resolve()
 			}
 		}
+	},
+	"/v1/classes/person/objects": {
+		"/:objectuid" : {
+			GET : {
+				_pre : function(req, res) {
+					req.logger.log("Calling single object hook in pre")
+					return this.resSuccess(req, res)
+				}
+			}
+		},
+		GET : {
+			_pre : function(req, res) {
+				req.logger.log("Call hit from hooks in object GET : ")
+				return this.resSuccess(req, res, "Success")
+			}
+		},
+		POST: {
+			_pre: function(req, res) {
+				req.logger.log("Test")
+				req.bobjekt = req.bobjekt.set("age", 54)
+				
+				req.logger.log(req.bobjekt)
+				
+				return this.resSuccess(req, res)
+			},
+			_post: function(req, res) {
+				return this.resSuccess(req, res)
+			}
+		}
 	}
+	/*,
+	"/v1/classes/person/objects/:objectUid": {
+		PUT:{
+			_pre: function(req, res){
+				req.logger.warn("warn")
+				req.bobjekt = req.bobjekt.set("name", "smita")
+				return when.resolve()
+			},
+			_post: function(req, res){
+				req.bobjekt['extra_field'] = "added"
+				return when.resolve()
+			}
+		},
+		GET: {
+			_post: function(req, res){
+				req.bobjekt.name = "bindok_"+req.bobjekt.name
+				return when.resolve()
+			}
+		},
+		DELETE : {
+			_pre: function(req, res){
+				console.log("_pre")
+				return when.resolve()	
+			},
+			_post: function(req, res){
+				console.log("_post")
+				var defered = utils.Promise.defer()
+				setTimeout(function(){
+					console.log("Timeout completed")
+					defered.resolve()
+				},1000)
+
+				return defered.promise
+			}
+		}
+	}*/
 }
