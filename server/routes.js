@@ -60,19 +60,28 @@ module.exports = {
 				return this.resSuccess(req, res)
 			},
 			_post: function(req, res) {
+				req.bobjekt["description"] = "New person object created.!"
 				return this.resSuccess(req, res)
 			}
 		},
-		PUT : {
-			_pre : function(req, res) {
-				var that = this
-				if(req.payload.age < 21) {
-					return that.resError(req, res, {
-						error : "Age must be greater than 21"
-					})
+		"/:personid" : {
+			PUT : {
+				_pre : function(req, res) {
+					var that = this
+					if(!req.payload.age) {
+						return that.resError(req, res, {
+							error : "Age needs to be provided"
+						})
+					}
+					
+					if(req.payload.age < 21) {
+						return that.resError(req, res, {
+							error : "Age must be greater than 21"
+						})
+					}
+	
+					return that.resSuccess(req, res)
 				}
-
-				return that.resSuccess(req, res)
 			}
 		}
 	},
