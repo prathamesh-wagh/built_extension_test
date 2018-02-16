@@ -12,7 +12,8 @@ module.exports = {
 		GET : {
 			_pre : function(req, res) {
 				req.logger.log("GET for bugs")
-				return this.resSuccess(req, res)
+				// return this.resSuccess(req, res)
+				return when.resolve()
 			}
 		}
 	},
