@@ -7,11 +7,45 @@ module.exports = {
 			return this.resSuccess(req, res, "Hello World..!!")
 		}
 	},
-	"/v1/classes/bugs/objects" : {
+	"/v1/classes/person/objects": {
 		GET : {
 			_pre : function(req, res) {
-				req.logger.log("GET for bugs")
-				return this.resSuccess(req, res, "Success")
+				// Fetches all persons with age 54
+				req.bobjekt = req.bobjekt.where("age", 54)
+				return this.resSuccess(req, res)
+			}
+		},
+		POST: {
+			_pre: function(req, res) {
+				// Set default age of person to 54 for every person being created
+				req.bobjekt = req.bobjekt.set("age", 54)				
+				return this.resSuccess(req, res)
+			},
+			_post: function(req, res) {
+				req.bobjekt["description"] = "New person object created.!"
+				return this.resSuccess(req, res)
+			}
+		},
+		"/:personid" : {
+			PUT : {
+				_pre : function(req, res) {
+					var that = this
+					// Checks whether age is provided in request payload else throws error
+					if(!req.payload.object.age) {
+						return that.resError(req, res, {
+							"error" : "Age needs to be provided"
+						})
+					}
+
+					// Checks whether age is less than 21 and if it is, then throws error
+					if(req.payload.object.age < 21) {
+						return that.resError(req, res, {
+							"error" : "Age must be greater than 21"
+						})
+					}
+
+					return that.resSuccess(req, res)
+				}
 			}
 		}
 	},
@@ -44,47 +78,6 @@ module.exports = {
       }
     }
   },
-	"/v1/classes/person/objects": {
-		GET : {
-			_pre : function(req, res) {
-				req.bobjekt = req.bobjekt.where("age", 54)
-				return this.resSuccess(req, res)
-			}
-		},
-		POST: {
-			_pre: function(req, res) {
-				req.bobjekt = req.bobjekt.set("age", 54)
-				
-				req.logger.log(req.bobjekt)
-				
-				return this.resSuccess(req, res)
-			},
-			_post: function(req, res) {
-				req.bobjekt["description"] = "New person object created.!"
-				return this.resSuccess(req, res)
-			}
-		},
-		"/:personid" : {
-			PUT : {
-				_pre : function(req, res) {
-					var that = this
-					if(!req.payload.object.age) {
-						return that.resError(req, res, {
-							error : "Age needs to be provided"
-						})
-					}
-					
-					if(req.payload.object.age < 21) {
-						return that.resError(req, res, {
-							error : "Age must be greater than 21"
-						})
-					}
-	
-					return that.resSuccess(req, res)
-				}
-			}
-		}
-	},
 	"/v1/functions/createPerson": {
 		POST : function(req, res) {
 			var that = this
@@ -103,6 +96,7 @@ module.exports = {
 				})
 			})
 			.catch(function(err) {
+				// Logs any error that occurs while executing this application
 				req.logger.log(err)
 				return that.resError(req, res, err)
 			})
@@ -114,7 +108,7 @@ module.exports = {
 			var bapp = req.builtApp
 			var that = this
 
-			// Fetch Built Class Query instance and call fetch()
+			// Fetch Built Class Query instance and call exec()
 			return bapp.Class("person").Query()
 			.exec()
 			.then(function(objects) {
@@ -124,35 +118,9 @@ module.exports = {
 				 })
 			})
 			.catch(function(err) {
+				// Logs any error that occurs while executing this application
 				req.logger.log(err)
 				return that.resError(req, res, err)
-			})
-		}
-	},
-	"/v1/functions/smita": {
-		GET: function(req, res){
-			this.resSuccess(req, res, {
-				smita: "is awesome"
-			})
-		}
-	},
-	"/v1/functions/test" : {
-		POST: function(req, res){
-			var that = this
-			req.builtApp = req.builtApp
-			
-			var response = {}
-
-			return req.builtApp.Class('person').Object(req.payload.data.person)
-			.save()
-			.then(function(person){
-				response['person'] = person.toJSON()
-				return req.builtApp.Class('address').Object(req.payload.data.address)
-				.save()
-			})
-			.then(function(address){
-				response['address'] = address.toJSON()
-				return that.resSuccess(req, res, response)
 			})
 		}
 	}
