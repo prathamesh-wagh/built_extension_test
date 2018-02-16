@@ -45,23 +45,14 @@ module.exports = {
     }
   },
 	"/v1/classes/person/objects": {
-		"/:objectuid" : {
-			GET : {
-				_pre : function(req, res) {
-					req.logger.log("Calling single object hook in pre")
-					return this.resSuccess(req, res)
-				}
-			}
-		},
 		GET : {
 			_pre : function(req, res) {
-				req.logger.log("Call hit from hooks in object GET : ")
-				return this.resSuccess(req, res, "Success")
+				req.bobjekt = req.bobjekt.where("age", 54)
+				return this.resSuccess(req, res)
 			}
 		},
 		POST: {
 			_pre: function(req, res) {
-				req.logger.log("Test")
 				req.bobjekt = req.bobjekt.set("age", 54)
 				
 				req.logger.log(req.bobjekt)
@@ -70,6 +61,18 @@ module.exports = {
 			},
 			_post: function(req, res) {
 				return this.resSuccess(req, res)
+			}
+		},
+		PUT : {
+			_pre : function(req, res) {
+				var that = this
+				if(req.payload.age < 21) {
+					return that.resError(req, res, {
+						error : "Age must be greater than 21"
+					})
+				}
+
+				return that.resSuccess(req, res)
 			}
 		}
 	},
