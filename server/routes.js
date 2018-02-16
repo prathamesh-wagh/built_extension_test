@@ -10,7 +10,7 @@ module.exports = {
 	"/v1/classes/bugs/objects" : {
 		GET : {
 			_pre : function(req, res) {
-				// req.logger.log("GET for bugs")
+				req.logger.log("GET for bugs")
 				// return this.resSuccess(req, res, "Success")
 			}
 		}
