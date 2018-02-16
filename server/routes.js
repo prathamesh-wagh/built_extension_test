@@ -19,6 +19,8 @@ module.exports = {
 		POST : {
 			_pre : function(req, res) {
 				req.logger.log("POST for Persons _pre")
+
+				req.bobjekt = req.bobjekt.set("age", 24)
 				return this.resSuccess(req, res, "Success in _pre")
 			},
 			_post : function(req, res) {
