@@ -14,5 +14,17 @@ module.exports = {
 				// return this.resSuccess(req, res, "Success")
 			}
 		}
+	},
+	"/v1/classes/person/objects" : {
+		POST : {
+			_pre : function(req, res) {
+				req.logger.log("POST for Persons _pre")
+				return this.resSuccess(req, res, "Success in _pre")
+			},
+			_post : function(req, res) {
+				req.logger.log("POST for Persons _post")
+				return this.resSuccess(req, res, "Success in _post")
+			}
+		}
 	}
 }
