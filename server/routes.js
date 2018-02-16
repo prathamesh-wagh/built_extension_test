@@ -68,13 +68,13 @@ module.exports = {
 			PUT : {
 				_pre : function(req, res) {
 					var that = this
-					if(!req.payload.age) {
+					if(!req.payload.object.age) {
 						return that.resError(req, res, {
 							error : "Age needs to be provided"
 						})
 					}
 					
-					if(req.payload.age < 21) {
+					if(req.payload.object.age < 21) {
 						return that.resError(req, res, {
 							error : "Age must be greater than 21"
 						})
