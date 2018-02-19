@@ -156,11 +156,15 @@ module.exports = {
 
 			builtApp = builtApp.setMasterKey("blt1247e1bd3347ffd1")
 
-			req.logger.log(req.params)
+			req.logger.log(req.payload)
 
 			var User = builtApp.User
 
+			req.logger.log(User)
+
 			var query = builtApp.Class("built_io_application_user").Query()
+
+			query = query.where("username", req.payload.username)
 
 			return User.generateAccessToken(query, false)
 			.then(function(user) {
