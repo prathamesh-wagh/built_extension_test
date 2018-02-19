@@ -85,7 +85,7 @@ module.exports = {
 					
 					req.logger.log(reqPayload)
 
-					req.logger.log(req.bobjekt)
+					req.logger.log(req.bobjekt.get("status"))
 
 					if(req.bobjekt.get("status") == "closed") {
 						return that.resError(req, res, {
