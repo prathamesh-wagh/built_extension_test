@@ -69,7 +69,7 @@ module.exports = {
 						"due_date" : "should not be a past date"
 					})
 				}
-				
+
 				return that.resSuccess(req, res)
 			}
 		},
@@ -144,6 +144,31 @@ module.exports = {
 			})
 			.catch(function(err) {
 				// Logs any error that occurs while executing this application
+				req.logger.log(err)
+				return that.resError(req, res, err)
+			})
+		}
+	},
+	"/v1/functions/anyAuthLogin" : {
+		POST : function(req, res) {
+			var that     = this
+			var builtApp = req.builtApp
+
+			builtApp = builtApp.setMasterKey("blt1247e1bd3347ffd1")
+
+			req.logger.log(req.params)
+
+			var User = builtApp.User
+
+			var query = builtApp.Class("built_io_application_user").Query()
+
+			return User.generateAccessToken(query, false)
+			.then(function(user) {
+				req.logger.log(user.toJSON())
+
+				return that.resSuccess(req, res, user.toJSON())
+			})
+			.catch(function(err) {
 				req.logger.log(err)
 				return that.resError(req, res, err)
 			})
