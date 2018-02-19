@@ -158,7 +158,9 @@ module.exports = {
 
 			req.logger.log(req.payload)
 
-			var User = builtApp.User()
+			var User = builtApp.User
+
+			req.logger.log(User.generateAuthToken)
 
 			var query = builtApp.Class("built_io_application_user").Query()
 
