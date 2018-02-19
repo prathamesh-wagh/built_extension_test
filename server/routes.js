@@ -85,9 +85,7 @@ module.exports = {
 					
 					req.logger.log(reqPayload)
 
-					req.logger.log(req.bobjekt.get("status"))
-
-					if(req.bobjekt.get("status") == "closed") {
+					if(req.bobjekt.get("status") == "Closed") {
 						return that.resError(req, res, {
 							"error" : "Bug status is already!"
 						})
