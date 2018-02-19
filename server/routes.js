@@ -87,7 +87,7 @@ module.exports = {
 
 			// Fetch Class instance, initializes object to save and calls save()
 			// function in Built SDK
-			req.logger.log(req.getContextVar("currentUser"))
+			req.logger.log(req.built.getContextVar("currentUser"))
 			return bapp.Class("person").Object({
 				"first_name" : req.payload.first_name
 			})
