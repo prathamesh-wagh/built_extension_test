@@ -87,7 +87,7 @@ module.exports = {
 
 					if(req.bobjekt.get("status") == "Closed") {
 						return that.resError(req, res, {
-							"error" : "Bug status is already!"
+							"error" : "Bug status is already closed.!"
 						})
 					}
 
