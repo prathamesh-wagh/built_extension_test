@@ -22,6 +22,7 @@ module.exports = {
 				return this.resSuccess(req, res)
 			},
 			_post: function(req, res) {
+				// Sets a default message in description once a person object is created
 				req.bobjekt["description"] = "New person object created.!"
 				return this.resSuccess(req, res)
 			}
@@ -84,10 +85,11 @@ module.exports = {
 			// Save Built App Instance
 			var bapp = req.builtApp
 
-			// Fetch Class instance and initialize object to save and call save()
+			// Fetch Class instance, initializes object to save and calls save()
 			// function in Built SDK
+			req.logger.log(req.getContextVar("currentUser"))
 			return bapp.Class("person").Object({
-				"first_name" : req.payload.data.first_name
+				"first_name" : req.payload.first_name
 			})
 			.save()
 			.then(function(personObject) {
