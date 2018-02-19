@@ -79,8 +79,11 @@ module.exports = {
 			PUT: {
 				// Before save hook
 				_pre: function(req, res) {
-					var that = this
-					var bapp = req.builtApp
+					var that       = this
+					var bapp       = req.builtApp
+					var reqPayload = req.payload.object
+					
+					req.logger.log(reqPayload)
 
 					if(req.bobjekt.get("status") == "closed") {
 						return that.resError(req, res, {
