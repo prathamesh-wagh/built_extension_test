@@ -54,23 +54,22 @@ module.exports = {
 		// POST call signifies Save operation
 		POST : {
 			_pre : function(req, res) {
-				var that       = this
-				var bapp       = req.builtApp
-				var reqPayload = req.payload.object
+				var that        = this
+				var bapp        = req.builtApp
+				var reqPayload  = req.payload.object
 
-				req.logger.log(reqPayload)
-
-				// Fetch bugs object from Built.io Backend
+				// Fetch date received in request payload
 				var dueDate     = new Date(reqPayload.due_date)
 				var currentDate = new Date()
 
-				// Compare due_date received from req.payload to update bug due_date
+				// Compare due_date received from req.payload to update bug due_date.
+				// If condition does not satisfy, then return error
 				if(dueDate < currentDate) {
 					return that.resError(req, res, {
 						"due_date" : "should not be a past date"
 					})
 				}
-
+				
 				return that.resSuccess(req, res)
 			}
 		},
@@ -82,12 +81,10 @@ module.exports = {
 					var that       = this
 					var bapp       = req.builtApp
 					var reqPayload = req.payload.object
-					
-					req.logger.log(reqPayload)
 
 					if(req.bobjekt.get("status") == "Closed") {
 						return that.resError(req, res, {
-							"error" : "Bug status is already closed.!"
+							"status" : "is already closed.!"
 						})
 					}
 
@@ -108,13 +105,12 @@ module.exports = {
   },
 	"/v1/functions/createPerson": {
 		POST : function(req, res) {
-			var that = this
 			// Save Built App Instance
 			var bapp = req.builtApp
+			var that = this
 
 			// Fetch Class instance, initializes object to save and calls save()
 			// function in Built SDK
-			req.logger.log(req.built.getContextVar("currentUser"))
 			return bapp.Class("person").Object({
 				"first_name" : req.payload.first_name
 			})
