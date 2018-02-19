@@ -54,13 +54,14 @@ module.exports = {
 		// POST call signifies Save operation
 		POST : {
 			_pre : function(req, res) {
-				var that = this
-				var bapp = req.builtApp
+				var that       = this
+				var bapp       = req.builtApp
+				var reqPayload = req.payload.object
 
-				req.logger.log(req.payload)
-				
+				req.logger.log(reqPayload)
+
 				// Fetch bugs object from Built.io Backend
-				var dueDate     = new Date(req.payload.due_date)
+				var dueDate     = new Date(reqPayload.due_date)
 				var currentDate = new Date()
 
 				// Compare due_date received from req.payload to update bug due_date
