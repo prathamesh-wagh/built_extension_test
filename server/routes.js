@@ -85,13 +85,15 @@ module.exports = {
 					
 					req.logger.log(reqPayload)
 
+					req.logger.log(req.bobjekt)
+
 					if(req.bobjekt.get("status") == "closed") {
 						return that.resError(req, res, {
 							"error" : "Bug status is already!"
 						})
 					}
 
-					var dueDate     = new Date(req.payload.due_date)
+					var dueDate     = new Date(reqPayload.due_date)
 					var currentDate = new Date()
 
 					// Compare due_date received from req.payload to update bug due_date
