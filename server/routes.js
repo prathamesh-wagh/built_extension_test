@@ -50,20 +50,15 @@ module.exports = {
 			}
 		}
 	},
-	"/v1/classes/bugs/objects/:objectuid" : {
-    // PUT call signifies Save operation
-    PUT: {
-      // Before save hook
-      _pre: function(req, res) {
-        var that = this
+	"/v1/classes/bugs/objects" : {
+		// POST call signifies Save operation
+		POST : {
+			_pre : function(req, res) {
+				var that = this
 				var bapp = req.builtApp
 
-				if(req.bobjekt.get("status") == "closed") {
-					return that.resError(req, res, {
-						"error" : "Bug status is already!"
-					})
-				}
-
+				req.logger.log(req.payload)
+				
 				// Fetch bugs object from Built.io Backend
 				var dueDate     = new Date(req.payload.due_date)
 				var currentDate = new Date()
@@ -76,8 +71,36 @@ module.exports = {
 				}
 
 				return that.resSuccess(req, res)
-      }
-    }
+			}
+		},
+		"/:buguid" : {
+   		// PUT call signifies Update operation
+			PUT: {
+				// Before save hook
+				_pre: function(req, res) {
+					var that = this
+					var bapp = req.builtApp
+
+					if(req.bobjekt.get("status") == "closed") {
+						return that.resError(req, res, {
+							"error" : "Bug status is already!"
+						})
+					}
+
+					var dueDate     = new Date(req.payload.due_date)
+					var currentDate = new Date()
+
+					// Compare due_date received from req.payload to update bug due_date
+					if(dueDate < currentDate) {
+						return that.resError(req, res, {
+							"due_date" : "should not be a past date"
+						})
+					}
+
+					return that.resSuccess(req, res)
+				}
+			}
+		}
   },
 	"/v1/functions/createPerson": {
 		POST : function(req, res) {
