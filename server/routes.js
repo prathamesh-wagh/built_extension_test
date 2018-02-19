@@ -86,10 +86,8 @@ module.exports = {
 
 			// Fetch Class instance and initialize object to save and call save()
 			// function in Built SDK
-			req.logger.log("Logging Name")
-			req.logger.log(req.payload)
 			return bapp.Class("person").Object({
-				"first_name" : req.payload.first_name
+				"first_name" : req.payload.data.first_name
 			})
 			.save()
 			.then(function(personObject) {
