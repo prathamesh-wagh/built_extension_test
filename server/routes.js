@@ -114,7 +114,7 @@ module.exports = {
 			// Fetch Class instance, initializes object to save and calls save()
 			// function in Built SDK
 			return bapp.Class("person").Object({
-				"first_name" : req.payload.object.first_name
+				"first_name" : req.payload.data.first_name
 			})
 			.save()
 			.then(function(personObject) {
@@ -154,7 +154,7 @@ module.exports = {
 	"/v1/functions/anyAuthLogin" : {
 		POST : function(req, res) {
 			var that     = this
-			
+
 			// Save Built App Instance
 			var builtApp = req.builtApp
 			builtApp     = builtApp.setMasterKey("bltf4a27ff1b7ce3a59")
@@ -172,6 +172,16 @@ module.exports = {
 				req.logger.log(err)
 				return that.resError(req, res, err)
 			})
+		}
+	},
+	"/v1/functions/getCurrentUser" : {
+		GET : function(req, res) {
+			// Using getContextVar, you can access the details of current User
+			// trying to access this API route.
+			// req.logger.log() will log details of Current User.
+			var currentUser = req.built.getContextVar("currentUser")
+			req.logger.log(currentUser)
+			return this.resSuccess(req, res, currentUser)
 		}
 	}
 }
