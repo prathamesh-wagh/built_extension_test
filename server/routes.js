@@ -109,6 +109,8 @@ module.exports = {
 			var bapp = req.builtApp
 			var that = this
 
+			req.logger.log(req.payload)
+
 			// Fetch Class instance, initializes object to save and calls save()
 			// function in Built SDK
 			return bapp.Class("person").Object({
@@ -151,10 +153,11 @@ module.exports = {
 	},
 	"/v1/functions/anyAuthLogin" : {
 		POST : function(req, res) {
-			var that     = this
+			// Save Built App Instance
 			var builtApp = req.builtApp
+			var that     = this 
 
-			builtApp = builtApp.setMasterKey("blt1247e1bd3347ffd1")
+			builtApp     = builtApp.setMasterKey("bltf4a27ff1b7ce3a59")
 
 			req.logger.log(req.payload)
 
