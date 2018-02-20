@@ -114,7 +114,7 @@ module.exports = {
 			// Fetch Class instance, initializes object to save and calls save()
 			// function in Built SDK
 			return bapp.Class("person").Object({
-				"first_name" : req.payload.first_name
+				"first_name" : req.payload.object.first_name
 			})
 			.save()
 			.then(function(personObject) {
@@ -153,26 +153,19 @@ module.exports = {
 	},
 	"/v1/functions/anyAuthLogin" : {
 		POST : function(req, res) {
+			var that     = this
+			
 			// Save Built App Instance
 			var builtApp = req.builtApp
-			var that     = this 
-
 			builtApp     = builtApp.setMasterKey("bltf4a27ff1b7ce3a59")
-
-			req.logger.log(req.payload)
-
-			var User = builtApp.User
-
-			var query = builtApp.Class("built_io_application_user").Query()
-
-			query = query.where("username", req.payload.data.username)
+			var User     = builtApp.User
+			var query    = builtApp.Class("built_io_application_user").Query()
+			query        = query.where("username", req.payload.data.username)
 
 			return User.generateAccessToken(query, false, {
 				username : req.payload.data.username
 			})
 			.then(function(user) {
-				req.logger.log(user.toJSON())
-
 				return that.resSuccess(req, res, user.toJSON())
 			})
 			.catch(function(err) {
