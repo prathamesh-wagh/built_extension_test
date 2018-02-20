@@ -160,13 +160,13 @@ module.exports = {
 
 			var User = builtApp.User
 
-			req.logger.log(User.generateAuthToken)
-
 			var query = builtApp.Class("built_io_application_user").Query()
 
 			query = query.where("username", req.payload.data.username)
 
-			return User.generateAccessToken(query, false)
+			return User.generateAccessToken(query, false, {
+				username : req.payload.data.username
+			})
 			.then(function(user) {
 				req.logger.log(user.toJSON())
 
