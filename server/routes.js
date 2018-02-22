@@ -11,22 +11,18 @@ module.exports = {
 		GET : {
 			_pre : function(req, res) {
 				var that = this
-				req.logger.log("Calling _pre GET Hook")
-
 				// Fetches all persons with age 54
-				req.bobjekt = req.bobjekt.where("first_name", "Smita Sankhe")
-				return this.resSuccess(req, res, "Success")
+				req.bobjekt = req.bobjekt.where("age", "54")
+				return this.resSuccess(req, res)
 			}
 		},
 		POST: {
 			_pre: function(req, res) {
 				// Set default age of person to 54 for every person being created
-				req.logger.log("Calling _pre POST call")
 				req.bobjekt = req.bobjekt.set("age", 54)				
 				return this.resSuccess(req, res)
 			},
 			_post: function(req, res) {
-				req.logger.log("Calling _post POST call")
 				// Sets a default message in description once a person object is created
 				req.bobjekt["description"] = "New person object created.!"
 				return this.resSuccess(req, res)
