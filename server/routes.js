@@ -20,10 +20,12 @@ module.exports = {
 		POST: {
 			_pre: function(req, res) {
 				// Set default age of person to 54 for every person being created
+				req.logger.log("Calling _pre POST call")
 				req.bobjekt = req.bobjekt.set("age", 54)				
 				return this.resSuccess(req, res)
 			},
 			_post: function(req, res) {
+				req.logger.log("Calling _post POST call")
 				// Sets a default message in description once a person object is created
 				req.bobjekt["description"] = "New person object created.!"
 				return this.resSuccess(req, res)
