@@ -11,10 +11,10 @@ module.exports = {
 		GET : {
 			_pre : function(req, res) {
 				var that = this
-				req.logger.log("Calling GET Hook")
-				req.logger.log(req.bobjekt)
+				req.logger.log("Calling _pre GET Hook")
+				
 				// Fetches all persons with age 54
-				req.bobjekt = req.bobjekt.set("first_name", "Prathamesh")
+				req.bobjekt = req.bobjekt.where("sdffsdfsfsd", "Smita Sankhe")
 				return this.resSuccess(req, res, "Success")
 			}
 		},
