@@ -15,6 +15,7 @@ module.exports = {
 				// Fetches all persons with age 54
 				req.bobjekt = req.bobjekt.where("first_name", "Prathamesh")
 				// return this.resSuccess(req, res, "Success")
+				return when.resolve()
 			}
 		},
 		POST: {
