@@ -11,6 +11,7 @@ module.exports = {
 		GET : {
 			_pre : function(req, res) {
 				req.logger.log("Calling GET Hook")
+				req.logger.log(req.bobjekt)
 				// Fetches all persons with age 54
 				req.bobjekt = req.bobjekt.where("age", 54)
 				return this.resSuccess(req, res)
