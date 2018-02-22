@@ -1,5 +1,5 @@
 var when = require('when')
-`module.exports = {
+module.exports = {
 	// hello_world is the name of function in this code block
 	"/v1/functions/hello_world" : {
 		GET : function(req, res) {
