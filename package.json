@@ -11,7 +11,6 @@
   "author": "abhijeet.sonawane.raweng <abhijeet.sonawane@raweng.com> (https://www.npmjs.com/~abhijeet.sonawane.raweng)",
   "license": "ISC",
   "dependencies": {
-    "built-extension-sdk": "file:custom-packages/built-extension-sdk-1.0.0.tgz",
     "expressjs": "*",
     "math": "*",
     "react": "*",
