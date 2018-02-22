@@ -12,9 +12,9 @@ module.exports = {
 			_pre : function(req, res) {
 				var that = this
 				req.logger.log("Calling _pre GET Hook")
-				
+
 				// Fetches all persons with age 54
-				req.bobjekt = req.bobjekt.where("sdffsdfsfsd", "Smita Sankhe")
+				req.bobjekt = req.bobjekt.where("first_name", "Smita Sankhe")
 				return this.resSuccess(req, res, "Success")
 			}
 		},
