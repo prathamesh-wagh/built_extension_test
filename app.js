@@ -25,13 +25,13 @@
 var Built = require('built-extension-sdk')
 
 // Initiate application
-var app = Built.App('blt8f9dff6a8e3d329c')
+var app = Built.App('blt8f9dff6a8e3d328b')
 // .setHost('localhost')
 // .setPort(8000)
 .setHost("dev-api.built.io")
 .setProtocol("https")
 // .setPort(80)
-.setMasterKey('blt89bb8dd35204a8dc')
+.setMasterKey('blt89bb8dd35304a8dc')
 
 var extensionSDK = app.Extension({
 	secret_key     : 'blta8c9b5ed7cdcfc35',
