@@ -13,8 +13,8 @@ module.exports = {
 				req.logger.log("Calling GET Hook")
 				req.logger.log(req.bobjekt)
 				// Fetches all persons with age 54
-				req.bobjekt = req.bobjekt.where("first_name", "Smita Sankhe")
-				return this.resSuccess(req, res)
+				req.bobjekt = req.bobjekt.where("first_name", "Prathamesh")
+				return this.resSuccess(req, res, "Success")
 			}
 		},
 		POST: {
