@@ -10,12 +10,12 @@ module.exports = {
 	"/v1/classes/person/objects": {
 		GET : {
 			_pre : function(req, res) {
+				var that = this
 				req.logger.log("Calling GET Hook")
 				req.logger.log(req.bobjekt)
 				// Fetches all persons with age 54
-				req.bobjekt = req.bobjekt.where("first_name", "Prathamesh")
-				// return this.resSuccess(req, res, "Success")
-				return when.resolve()
+				req.bobjekt = req.bobjekt.set("first_name", "Prathamesh")
+				return this.resSuccess(req, res, "Success")
 			}
 		},
 		POST: {
