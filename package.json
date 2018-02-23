@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "preinstall": "npm install ./custom-packages/built-extension-sdk-1.0.0.tgz",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js"
   },
@@ -14,6 +13,8 @@
     "expressjs": "*",
     "math": "*",
     "react": "*",
-    "request": "*"
+    "request": "*",
+    "built-extension-sdk" : "*",
+    "when" : "*"
   }
 }
