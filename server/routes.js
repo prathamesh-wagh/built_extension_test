@@ -33,8 +33,6 @@ module.exports = {
 				_pre : function(req, res) {
 					var that = this
 					// Checks whether age is provided in request payload else throws error
-					req.logger.log("Calling PUT _pre")
-					req.logger.log(req.bobjekt.data)
 					if(!req.payload.object.age) {
 						return that.resError(req, res, {
 							"error" : "Age needs to be provided"
