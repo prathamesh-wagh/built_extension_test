@@ -2,7 +2,7 @@ var Built = require('built-extension-sdk')
 
 // Initiate application
 var app = Built.App('blt8cb659c05289f7a3')
-.setHost("devdsdsdfsdf-api.built.io")
+.setHost("dev-api.built.io")
 .setProtocol("https")
 .setMasterKey('bltf4a27ff1b7ce3a59')
 
@@ -18,7 +18,7 @@ var extensionSDK = app.Extension({
 	routes         : require('./server/routes')
 })
 
-return extensionSDK.start(9000)
+// return extensionSDK.start(9000)
 
 // Wrong code
 // var Built = require('built-extension-sdk')
