@@ -3,7 +3,10 @@ module.exports = {
 	// hello_world is the name of function in this code block
 	"/v1/functions/hello_world" : {
 		GET : function(req, res) {
-			req.logger.log("Calling function hello_world")
+			req.logger.log("Calling function hello_world.!")
+			req.logger.error("Logging Error..!!")
+			req.logger.warn("Logging warning..!!")
+			req.logger.info("Logging info..!!")
 			return this.resSuccess(req, res, "Hello World..!!")
 		}
 	},
