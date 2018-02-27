@@ -1,15 +1,15 @@
 var Built = require('built-extension-sdk')
 
 // Initiate application
-// var app = Built.App('bltf13070ab533002d8')
-// .setHost("stag-api.built.io")
-// .setProtocol("https")
-// .setMasterKey('blt0c0f998a30f328e5')
-
-var app = Built.App('blt8cb659c0528997a3')
-.setHost("asdasd-api.built.io")
+var app = Built.App('bltf13070ab533002d8')
+.setHost("stag-api.built.io")
 .setProtocol("https")
-.setMasterKey('bltf4a27ff1b7993a59')
+.setMasterKey('blt0c0f998a30f328e5')
+
+// var app = Built.App('blt8cb659c0528997a3')
+// .setHost("dev-api.built.io")
+// .setProtocol("https")
+// .setMasterKey('bltf4a27ff1b7993a59')
 
 // 574df6c8fb2034b1603d792e8e2922268779c456 - access token
 // bltc88f3d42ad8a728c - secret key
