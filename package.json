@@ -15,6 +15,7 @@
     "react": "*",
     "request": "*",
     "built-extension-sdk": "file:custom-packages/built-extension-sdk-1.0.0.tgz",
-    "when": "*"
+    "when": "*",
+    "lodash" :"*"
   }
 }
