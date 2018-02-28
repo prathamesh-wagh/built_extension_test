@@ -1,7 +1,7 @@
 var Built = require('built-extension-sdk')
 
 // Initiate application
-var app = Built.App('bltd7e5a97b5f511782')
+var app = Built.App('bltd7e5a97bfsdfsdsf5f511782')
 .setHost("api.built.io")
 .setProtocol("https")
 .setMasterKey('blt6628a01c0ff62dab')
@@ -17,7 +17,7 @@ var app = Built.App('bltd7e5a97b5f511782')
 // web hook url - https://test-stag-api.built.io/v1/extensions/blt_ext_default/redeploy?application_api_key=bltc4f7ed1f03053fe8
 
 var extensionSDK = app.Extension({
-	extension_key  : 'blt_ext_default_test_app',
+	extension_key  : 's',
 	secret_key     : 'app_test_123',
 	// extension_key  : 'blt_ext_third_party',
 	// secret_key     : 'blt_ext_third_party_secret',
