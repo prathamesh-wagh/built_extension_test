@@ -16,13 +16,6 @@ var app = Built.App('bltd7e5a97b5f511782')
 // blt_ext_default_test - extension key - blt_ext_third_party_secret, blt_ext_third_party
 // web hook url - https://test-stag-api.built.io/v1/extensions/blt_ext_default/redeploy?application_api_key=bltc4f7ed1f03053fe8
 
-var extensionSDK = app.Extension({
-	extension_key  : 'blt_ext_default_test_app',
-	secret_key     : 'app_test_123',
-	// extension_key  : 'blt_ext_third_party',
-	// secret_key     : 'blt_ext_third_party_secret',
-	static         : __dirname + '/client',
-	routes         : require('./server/routes')
-})
+var extensionSDK = app.Extension()
 
-// return extensionSDK.start(9000)
+return extensionSDK.start(9000)
