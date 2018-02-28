@@ -15,7 +15,7 @@ module.exports = {
 			_pre : function(req, res) {
 				var that = this
 				// Fetches all persons with age 54
-				req.bobjekt = req.bobjekt.where("age", 54)
+				req.bobjekt = req.bobjekt.where("age", a)
 				// return this.resSuccess(req, res)
 				return when.resolve()
 			}
