@@ -4,7 +4,7 @@ var Built = require('built-extension-sdk')
 var app = Built.App('bltd7e5a97b5f511782')
 .setHost("api.built.io")
 .setProtocol("https")
-.setMasterKey('blt6628a01c0ffdfsdfsf62dab')
+.setMasterKey('blt6628a01c0ff62dab')
 
 // var app = Built.App('blt8cb659c0528997a3')
 // .setHost("dev-api.built.io")
@@ -25,4 +25,4 @@ var extensionSDK = app.Extension({
 	routes         : require('./server/routes')
 })
 
-return extensionSDK.start(9000)
+// return extensionSDK.start(9000)
