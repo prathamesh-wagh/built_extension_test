@@ -7,6 +7,8 @@ module.exports = {
 			req.logger.error("Logging Error..!!")
 			req.logger.warn("Logging warning..!!")
 			req.logger.info("Logging info..!!")
+
+			req.logger.log(req.headers)
 			return this.resSuccess(req, res, "Hello World..!!")
 		}
 	},
