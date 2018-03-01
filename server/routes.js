@@ -9,7 +9,9 @@ module.exports = {
 			req.logger.info("Logging info..!!")
 
 			req.logger.log(req.headers)
-			return this.resSuccess(req, res, "Hello World..!!")
+			return this.resSuccess(req, res, {
+				message : "Hello World..!!"
+			})
 		}
 	},
 	"/v1/classes/person/objects": {
@@ -166,7 +168,9 @@ module.exports = {
 	"/v1/functions/changePersonName" : {
 		PUT : function(req, res) {
 			req.logger.log("Person Name PUT called")
-			return this.resSuccess(req, res, "PUT Call completed")
+			return this.resSuccess(req, res, {
+				response : "PUT Call completed"
+			})
 		}
 	},
 	"/v1/functions/anyAuthLogin" : {
