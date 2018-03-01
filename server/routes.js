@@ -1,18 +1,12 @@
 var when = require('when')
 module.exports = {
 	// hello_world is the name of function in this code block
-	// "/v1/functions/hello_world" : {
-	// 	GET : function(req, res) {
-	// 		req.logger.log("Calling function hello_world.!")
-	// 		req.logger.error("Logging Error..!!")
-	// 		req.logger.warn("Logging warning..!!")
-	// 		req.logger.info("Logging info..!!")
-	// 		return this.resSuccess(req, res, "Hello World..!!")
-	// 	}
-	// },
-	"/v4/functions/hello_world" : {
+	"/v1/functions/hello_world" : {
 		GET : function(req, res) {
-			req.logger.log("Calling function hello_world for v4.!")
+			req.logger.log("Calling function hello_world.!")
+			req.logger.error("Logging Error..!!")
+			req.logger.warn("Logging warning..!!")
+			req.logger.info("Logging info..!!")
 			return this.resSuccess(req, res, "Hello World..!!")
 		}
 	},
@@ -22,8 +16,7 @@ module.exports = {
 				var that = this
 				// Fetches all persons with age 54
 				req.bobjekt = req.bobjekt.where("age", 54)
-				// return this.resSuccess(req, res)
-				return when.resolve()
+				return this.resSuccess(req, res)
 			}
 		},
 		POST: {
