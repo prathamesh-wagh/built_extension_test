@@ -10,6 +10,12 @@ module.exports = {
 			return this.resSuccess(req, res, "Hello World..!!")
 		}
 	},
+	"/v4/functions/hello_world" : {
+		GET : function(req, res) {
+			req.logger.log("Calling function hello_world for v4.!")
+			return this.resSuccess(req, res, "Hello World..!!")
+		}
+	},
 	"/v1/classes/person/objects": {
 		GET : {
 			_pre : function(req, res) {
