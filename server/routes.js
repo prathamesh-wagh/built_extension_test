@@ -110,11 +110,15 @@ module.exports = {
 		}
 	},
 	// Function route endpoint to create Person in Built.io Backend
-	"/v1/functions/createPerson": {
+	"/v1/functions/createPerson": {	
 		POST : function(req, res) {
 			// Save Built App Instance
 			var bapp = req.builtApp
 			var that = this
+
+			req.logger.log(req.payload)
+
+			req.logger.log(req.headers)
 			
 			// Fetch Class instance, initializes object to save and calls save()
 			// function in Built SDK
