@@ -32,7 +32,7 @@ module.exports = {
 				return this.resSuccess(req, res)
 			}
 		},
-		"/:personid" : {
+		"/:person_uid" : {
 			PUT : {
 				_pre : function(req, res) {
 					var that = this
@@ -156,6 +156,12 @@ module.exports = {
 				req.logger.log(err)
 				return that.resError(req, res, err)
 			})
+		}
+	},
+	"/v1/functions/changePersonName" : {
+		PUT : function(req, res) {
+			req.logger.log("Person Name PUT called")
+			return this.resSuccess(req, res, "PUT Call completed")
 		}
 	},
 	"/v1/functions/anyAuthLogin" : {
