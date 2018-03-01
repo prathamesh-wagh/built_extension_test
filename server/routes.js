@@ -175,7 +175,7 @@ module.exports = {
 
 			// Save Built App Instance
 			var builtApp = req.builtApp
-			builtApp     = builtApp.setMasterKey("blt0c0f998a30f328e5")
+			builtApp     = builtApp.setMasterKey("blt6628a01c0ff62dab")
 			var User     = builtApp.User
 			var query    = builtApp.Class("built_io_application_user").Query()
 			query        = query.where("username", req.payload.data.username)
