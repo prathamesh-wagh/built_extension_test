@@ -3,12 +3,12 @@ module.exports = {
 	// hello_world is the name of function in this code block
 	"/v1/functions/hello_world" : {
 		GET : function(req, res) {
-			req.logger.log("Calling function hello_world.!")
-			req.logger.error("Logging Error..!!")
-			req.logger.warn("Logging warning..!!")
-			req.logger.info("Logging info..!!")
+			// req.logger.log("Calling function hello_world.!")
+			// req.logger.error("Logging Error..!!")
+			// req.logger.warn("Logging warning..!!")
+			// req.logger.info("Logging info..!!")
 
-			req.logger.log(req.headers)
+			// req.logger.log(req.headers)
 			return this.resSuccess(req, res, {
 				message : "Hello World..!!"
 			})
@@ -79,7 +79,6 @@ module.exports = {
 						"due_date" : "should not be a past date"
 					})
 				}
-
 				return that.resSuccess(req, res)
 			}
 		},
@@ -91,6 +90,10 @@ module.exports = {
 					var that       = this
 					var bapp       = req.builtApp
 					var reqPayload = req.payload.object
+
+					console.log("Request object : ", req.bobjekt)
+
+					console.log("Request payload : ",  reqPayload)
 
 					if(req.bobjekt.get("status") == "Closed") {
 						return that.resError(req, res, {
@@ -120,9 +123,7 @@ module.exports = {
 			var bapp = req.builtApp
 			var that = this
 
-			req.logger.log(req.payload)
-
-			req.logger.log(req.headers)
+			console.log(req.payload)
 			
 			// Fetch Class instance, initializes object to save and calls save()
 			// function in Built SDK
@@ -138,7 +139,7 @@ module.exports = {
 			})
 			.catch(function(err) {
 				// Logs any error that occurs while executing this application
-				req.logger.log(err)
+				console.log(err)
 				return that.resError(req, res, err)
 			})
 		}
@@ -166,7 +167,7 @@ module.exports = {
 		}
 	},
 	"/v1/functions/changePersonName" : {
-		PUT : function(req, res) {
+		DELETE : function(req, res) {
 			req.logger.log("Person Name PUT called")
 			return this.resSuccess(req, res, {
 				response : "PUT Call completed"
