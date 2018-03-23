@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "node app.js"
   },
   "author": "abhijeet.sonawane.raweng <abhijeet.sonawane@raweng.com> (https://www.npmjs.com/~abhijeet.sonawane.raweng)",
   "license": "ISC",
@@ -14,7 +14,7 @@
     "math": "*",
     "react": "*",
     "request": "*",
-    "built-extension-sdk": "file:custom-packages/built-extension-sdk-1.0.0.tgz",
+    "built-extension-sdk": "1.0.1",
     "when": "*",
     "lodash": "*"
   }

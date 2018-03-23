@@ -10,7 +10,7 @@ module.exports = {
 
 			// req.logger.log(req.headers)
 			return this.resSuccess(req, res, {
-				message : "Hello World..!!"
+				message : "Hello World with Github Extensions..!!"
 			})
 		}
 	},
@@ -19,23 +19,26 @@ module.exports = {
 			_pre : function(req, res) {
 				var that = this
 				// Fetches all persons with age 54
+				req.logger.log("Hook for GET Person")
 				req.bobjekt = req.bobjekt.where("age", 54)
 				return this.resSuccess(req, res)
 			}
 		},
 		POST: {
 			_pre: function(req, res) {
+				req.logger.log("Hook for POST _pre Person")
 				// Set default age of person to 54 for every person being created
-				req.bobjekt = req.bobjekt.set("age", 54)				
+				req.bobjekt = req.bobjekt.set("age", 54)
 				return this.resSuccess(req, res)
 			},
 			_post: function(req, res) {
+				req.logger.log("Hook for POST _post Person")
 				// Sets a default message in description once a person object is created
 				req.bobjekt["description"] = "New person object created.!"
 				return this.resSuccess(req, res)
 			}
 		},
-		"/:person_uid" : {
+		"/:uid" : {
 			PUT : {
 				_pre : function(req, res) {
 					var that = this
@@ -72,6 +75,8 @@ module.exports = {
 				var dueDate     = new Date(reqPayload.due_date)
 				var currentDate = new Date()
 
+				req.logger.log("Hook for POST _pre Bugs")
+
 				// Compare due_date received from req.payload to update bug due_date.
 				// If condition does not satisfy, then return error
 				if(dueDate < currentDate) {
@@ -82,7 +87,7 @@ module.exports = {
 				return that.resSuccess(req, res)
 			}
 		},
-		"/:buguid" : {
+		"/:uid" : {
    		// PUT call signifies Update operation
 			PUT: {
 				// Before save hook
@@ -91,9 +96,9 @@ module.exports = {
 					var bapp       = req.builtApp
 					var reqPayload = req.payload.object
 
-					console.log("Request object : ", req.bobjekt)
+					req.logger.log("Request object : ", req.bobjekt)
 
-					console.log("Request payload : ",  reqPayload)
+					req.logger.log("Request payload : ",  reqPayload)
 
 					if(req.bobjekt.get("status") == "Closed") {
 						return that.resError(req, res, {
@@ -117,13 +122,13 @@ module.exports = {
 		}
 	},
 	// Function route endpoint to create Person in Built.io Backend
-	"/v1/functions/createPerson": {	
+	"/v1/functions/createPerson": {
 		POST : function(req, res) {
 			// Save Built App Instance
 			var bapp = req.builtApp
 			var that = this
 
-			console.log(req.payload)
+			req.logger.log(req.payload)
 			
 			// Fetch Class instance, initializes object to save and calls save()
 			// function in Built SDK
@@ -139,7 +144,7 @@ module.exports = {
 			})
 			.catch(function(err) {
 				// Logs any error that occurs while executing this application
-				console.log(err)
+				req.logger.log(err)
 				return that.resError(req, res, err)
 			})
 		}
@@ -180,7 +185,7 @@ module.exports = {
 
 			// Save Built App Instance
 			var builtApp = req.builtApp
-			builtApp     = builtApp.setMasterKey("blt6628a01c0ff62dab")
+			builtApp     = builtApp.setMasterKey("bltf4a27ff1b7ce3a59")
 			var User     = builtApp.User
 			var query    = builtApp.Class("built_io_application_user").Query()
 			query        = query.where("username", req.payload.data.username)
